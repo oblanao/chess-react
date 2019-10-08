@@ -1,0 +1,7 @@
+.quiz-container {
+  text-align: center;
+}
+
+.quiz-container>h2, .quiz-container>h3 {
+  margin: 10px 0px;
+}

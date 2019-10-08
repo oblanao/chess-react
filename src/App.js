@@ -9,7 +9,7 @@ function App() {
       onComplete={() => { console.log('ma sugi') }}
       onTimeout={() => {console.log('timeout')}}
       text="Play the KID Saemisch"
-      position="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+      position="r1bqkbnr/pppp1ppp/8/1B2p3/3nP3/8/PPPP1PPP/RNBQK1NR b KQkq -"
       solution={[
         {
           from: 'd2',
