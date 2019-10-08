@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Diagram from './Diagram/';
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Diagram
+      // time={5}
+      onComplete={() => { console.log('ma sugi') }}
+      onTimeout={() => {console.log('timeout')}}
+      text="Play the KID Saemisch"
+      position="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+      solution={[
+        {
+          from: 'd2',
+          to: 'd4'
+        },
+        {
+          from: 'g8',
+          to: 'f6'
+        },
+        {
+          from: 'c2',
+          to: 'c4'
+        }
+      ]} />
   );
 }
 
