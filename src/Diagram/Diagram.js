@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Chessboard from 'chessboardjsx';
-import Chess from 'chess.js';
+// import Chess from 'chess.js';
 import './Diagram.css';
+const Chess = require('chess.js');
 
 export default class Diagram extends Component {
   constructor(props) {
     super(props);
     this.state = {
       game: null,
-      fen: props.position,
+      fen: '',
       toMove: null,
       solutionProgress: 0,
       timer: null,
@@ -19,8 +20,11 @@ export default class Diagram extends Component {
     this.updateTimeLeft = this.updateTimeLeft.bind(this)
   }
   componentDidMount() {
-    let game = new Chess(this.props.position);
-    this.setState({ game }, () => {
+    console.log('didmount')
+    console.log(`props`, this.props)
+    let game = new Chess(this.props.position)
+    let fen = game.fen()
+    this.setState({ game, fen }, () => {
       this.setOrientation()
       this.updateToMove()
     })
@@ -45,7 +49,7 @@ export default class Diagram extends Component {
     this.setState({
       orientation
     })
-    
+
   }
   updateTimeLeft() {
     function checkTime() {
@@ -56,7 +60,6 @@ export default class Diagram extends Component {
     }
     const timeLeft = Math.round(this.state.timeLeft - 1)
     this.setState({ timeLeft }, checkTime)
-    console.log(timeLeft)
   }
   updateToMove() {
     const { game } = this.state;
@@ -71,12 +74,27 @@ export default class Diagram extends Component {
   }
   isCorrectMove(move) {
     const expectedMove = this.props.solution[this.state.solutionProgress];
-    return expectedMove.from === move.sourceSquare && expectedMove.to === move.targetSquare;
+    // return expectedMove.from === move.sourceSquare && expectedMove.to === move.targetSquare;
+    if (expectedMove.from === move.sourceSquare && expectedMove.to === move.targetSquare) {
+      console.log('correct move!')
+      return true
+    } else {
+      console.log('incorrect move!')
+      return false;
+    }
   }
   isSolutionComplete() {
-    return this.state.solutionProgress === this.props.solution.length
+    // return this.state.solutionProgress === this.props.solution.length
+    if (this.state.solutionProgress === this.props.solution.length) {
+      console.log('solution complete!')
+      return true
+    } else {
+      console.log('still got moves to enter');
+      return false;
+    }
   }
   makeAutoMove() {
+    console.log('Auto making move')
     const { game } = this.state;
     const moveToMake = this.props.solution[this.state.solutionProgress]
     game.move(moveToMake);
@@ -118,14 +136,15 @@ export default class Diagram extends Component {
       return 'snapback'
     }
     if (!this.isCorrectMove(moveObj)) {
-      alert('ma sugi');
+      // alert('ma sugi');
       this.state.game.undo()
+      this.props.onWrongMove && this.props.onWrongMove(this.state.timeLeft)
       return 'snapback'
     } else {
       this.updateGame(game)
       if (this.isSolutionComplete()) {
-        console.log(`complete`)
-        this.props.onComplete && this.props.onComplete()
+        clearInterval(this.state.timer)
+        this.props.onCorrect && this.props.onCorrect(this.state.timeLeft)
       } else {
         this.makeAutoMove()
       }
@@ -134,9 +153,9 @@ export default class Diagram extends Component {
   render() {
     return (
       <div className="diagram-container">
-        <h3>{this.state.toMove}</h3>
-        <Chessboard orientation={this.state.orientation} allowDrag={this.allowDrag} onDrop={this.onDrop} position={this.state.fen} />
+        <h5>{this.state.toMove}</h5>
         <p>{this.props.text}</p>
+        <Chessboard orientation={this.state.orientation} allowDrag={this.allowDrag} onDrop={this.onDrop} position={this.state.fen} />
         <p>Time left: {this.state.timeLeft} seconds</p>
       </div>
     )

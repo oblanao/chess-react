@@ -1,29 +1,109 @@
 import React from 'react';
 import Diagram from './Diagram/';
 import './App.css'
+import Quiz from './Quiz/Quiz';
 
 function App() {
   return (
-    <Diagram
-      // time={5}
-      onComplete={() => { console.log('ma sugi') }}
-      onTimeout={() => {console.log('timeout')}}
-      text="Play the KID Saemisch"
-      position="r1bqkbnr/pppp1ppp/8/1B2p3/3nP3/8/PPPP1PPP/RNBQK1NR b KQkq -"
-      solution={[
+    // <Diagram
+    //   // time={5}
+    //   onComplete={() => { console.log('ma sugi') }}
+    //   onTimeout={() => {console.log('timeout')}}
+    //   text="Play the KID Saemisch"
+    //   position="rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 1"
+    //   solution={[
+    //     {
+    //       from: 'd7',
+    //       to: 'd5'
+    //     }
+    //   ]} />
+    <Quiz
+      time={5}
+      diagrams={[
         {
-          from: 'd2',
-          to: 'd4'
+          text: "Mate in 1",
+          position: "8/8/5K1k/8/8/8/8/R7 w - - 0 1",
+          solution: [
+            {
+              from: 'a1',
+              to: 'h1'
+            }
+          ]
         },
         {
-          from: 'g8',
-          to: 'f6'
+          text: "Mate in 2",
+          position: "r2r3k/6pp/7N/3Q4/8/8/6PP/6K1 w - - 0 1",
+          solution: [
+            {
+              from: 'd5',
+              to: 'g8'
+            },
+            {
+              from: 'd8',
+              to: 'g8'
+            },
+            {
+              from: 'h6',
+              to: 'f7'
+            }
+          ]
         },
         {
-          from: 'c2',
-          to: 'c4'
+          text: "Play the Saemisch",
+          position: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          solution: [
+            {
+              from: 'd2',
+              to: 'd4'
+            },
+            {
+              from: 'g8',
+              to: 'f6'
+            },
+            {
+              from: 'c2',
+              to: 'c4'
+            },
+            {
+              from: 'g7',
+              to: 'g6'
+            },
+            {
+              from: 'b1',
+              to: 'c3'
+            },
+            {
+              from: 'f8',
+              to: 'g7'
+            },
+            {
+              from: 'e2',
+              to: 'e4'
+            },
+            {
+              from: 'd7',
+              to: 'd6'
+            },
+            {
+              from: 'f2',
+              to: 'f3'
+            }
+          ]
+        },
+        {
+          text: "Mate in 1",
+          position: "8/8/8/4n3/8/6k1/6b1/6K1 b - - 0 1",
+          solution: [
+            {
+              from: 'e5',
+              to: 'f3'
+            }
+          ]
         }
-      ]} />
+      ]}
+      onComplete={console.log}
+    />
+
   );
 }
 

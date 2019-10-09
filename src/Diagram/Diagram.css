@@ -3,3 +3,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+.diagram-container>h5 {
+  margin: 0 auto
+}
