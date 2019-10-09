@@ -1,3 +1,4 @@
+// TODO: rename solutions to answers
 import React, { Component } from 'react';
 import Diagram from '../Diagram';
 import './Quiz.css';
@@ -57,7 +58,11 @@ export default class Quiz extends Component {
   updateGame(timeLeft, correct) {
     this.updateSolutions(timeLeft, correct);
     if (this.isQuizFinished()) {
-      return this.props.onComplete(this.state.solutions)
+      let finalResults = {
+        results: this.state.solutions,
+        time: this.props.time
+      }
+      return this.props.onComplete(finalResults)
     }
     this.updateData()
   }
