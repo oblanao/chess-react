@@ -1,37 +1,57 @@
 import React, { Component } from 'react';
+import Chessboard from 'chessboardjsx';
+import './DiagramViewer.css';
 
 export default class DiagramViewer extends Component {
   constructor(props) {
     super(props);
-    this.game = this.props.data
-    console.log(this.game)
-    const moves = this.game.history({ verbose: true })
-    // while (this.game.undo()) {
-    //   this.game.undo();
-    // }
     this.state = {
-      history: this.makeHistory(this.game.history({ verbose: true }))
+      game: null,
+      history: this.props.data.history(),
+      orientation: '',
+      sideToMove: ''
     }
   }
-  makeHistory(history) {
-    return history.map(entry => ({
-      from: entry.from,
-      to: entry.to
-    }))
+  componentDidMount() {
+    console.log(`didMount with game`)
+    console.log(this.props.data.ascii())
+    this.setInitialGame();
   }
-  makeInitialPosition(game) {
-    let initialGame = game;
+  setInitialGame() {
+    let initialGame = this.props.data;
+    let nrMoves = 0;
     while (initialGame.undo()) {
       initialGame.undo()
+      nrMoves++
     }
-    return initialGame
+    let game = initialGame;
+    const turn = initialGame.turn();
+    let orientation = 'white'
+    let sideToMove = 'White to move'
+    if (turn === 'b') {
+      orientation = 'black';
+      sideToMove = 'Black to move'
+    }
+    this.setState({
+      game,
+      orientation,
+      sideToMove
+    })
   }
   render() {
+    console.log(this.state.game)
     return (
-      <React.Fragment>
-        <pre>{this.makeInitialPosition(this.game).ascii()}</pre>
-        <pre>{JSON.stringify(this.state.history, null, 3)}</pre>
-      </React.Fragment>
+      <div className="diagramViewer-container">
+        <Chessboard
+          width={this.props.width || 300}
+          id={this.state.game && this.state.game.fen()}
+          // draggable={false}
+          position={this.state.game && this.state.game.fen()}
+          orientation={this.state.orientation}
+        />
+        <p>{this.state.sideToMove}</p>
+        <pre>{this.state.history.join(" ")}</pre>
+      </div>
     )
   }
 }

@@ -1,0 +1,14 @@
+.diagramViewer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 5px;
+}
+
+.diagramViewer-container>p {
+  margin: 0;
+}
+
+.diagramViewer-container>pre {
+  margin: 0;
+}
