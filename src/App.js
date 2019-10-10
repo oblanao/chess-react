@@ -23,7 +23,7 @@ export default class App extends Component {
   render() {
     const element = this.state.stage === 'quiz' ?
       <Quiz
-        time={5}
+        time={15}
         onComplete={this.onComplete}
         diagrams={diagrams}
       />
