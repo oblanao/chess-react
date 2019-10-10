@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Diagram from './Diagram/';
+import FileImport from './FileImport';
 import diagrams from './diagrams';
 import Results from './Results';
 
@@ -29,21 +30,23 @@ export default class App extends Component {
       />
       :
       <Results data={this.state.results} />
-    // <Diagram
-    //   // time={5}
-    //   onComplete={() => { console.log('ma sugi') }}
-    //   onTimeout={() => {console.log('timeout')}}
-    //   text="Play the KID Saemisch"
-    //   position="rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 1"
-    //   solution={[
-    //     {
-    //       from: 'd7',
-    //       to: 'd5'
-    //     }
-    //   ]} />
     // <Results data={this.state.results} />
     return (
-     element
+      // <Diagram
+      // // time={5}
+      // onComplete={() => { console.log('ma sugi') }}
+      // onTimeout={() => {console.log('timeout')}}
+      // text="Play the KID Saemisch"
+      // // position="rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 1"
+      // position="7k/1pp4p/3p2q1/p1nPp3/2P1Pr2/8/PPB5/1K4RQ b - - 0 1"
+      // solution={[
+      //   {
+      //     from: 'd7',
+      //     to: 'd5'
+      //   }
+      // ]} />
+    //  element
+    <FileImport />
     )
   }
 }
