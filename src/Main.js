@@ -10,6 +10,7 @@ import SampleQuestion from './Question/SampleQuestion';
 import Quiz from './Quiz';
 
 import PgnImport from "./PgnImport";
+import PositionSetup from "./PositionSetup";
 
 export default function Main() {
   return (
@@ -26,6 +27,9 @@ export default function Main() {
         </Route>
         <Route path="/pgn-import">
           <PgnImport />
+        </Route>
+        <Route path="/position-setup">
+          <PositionSetup />
         </Route>
         <Route path="*">
           <p>404 - Not Found</p>

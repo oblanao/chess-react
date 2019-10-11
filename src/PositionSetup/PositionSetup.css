@@ -1,0 +1,18 @@
+.positionSetup-container {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  font-size: 1.6rem;
+}
+
+.positionSetup-extras-container {
+  margin-top: 60px;
+  padding: 10px;
+}
+
+form {
+  margin-bottom: 3px;
+  padding: 3px;
+  border: 1px solid black;
+}
