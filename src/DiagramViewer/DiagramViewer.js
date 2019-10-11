@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Chess from 'chess.js';
 import Chessboard from 'chessboardjsx';
+
 import './DiagramViewer.css';
 
 export default class DiagramViewer extends Component {
@@ -7,22 +9,26 @@ export default class DiagramViewer extends Component {
     super(props);
     this.state = {
       game: null,
-      history: this.props.data.history(),
+      history: [],
       orientation: '',
       sideToMove: ''
     }
   }
   componentDidMount() {
-    console.log(`didMount with game`)
-    console.log(this.props.data.ascii())
     this.setInitialGame();
   }
+  makeGameFromPgn(pgn) {
+    const game = new Chess();
+    game.load_pgn(pgn);
+    return game;
+  }
   setInitialGame() {
-    let initialGame = this.props.data;
-    let nrMoves = 0;
+    let initialGame = this.makeGameFromPgn(this.props.pgn);
+    this.setState({
+      history: initialGame.history()
+    })
     while (initialGame.undo()) {
       initialGame.undo()
-      nrMoves++
     }
     let game = initialGame;
     const turn = initialGame.turn();
@@ -39,13 +45,12 @@ export default class DiagramViewer extends Component {
     })
   }
   render() {
-    console.log(this.state.game)
     return (
       <div className="diagramViewer-container">
         <Chessboard
           width={this.props.width || 300}
           id={this.state.game && this.state.game.fen()}
-          // draggable={false}
+          draggable={false}
           position={this.state.game && this.state.game.fen()}
           orientation={this.state.orientation}
         />

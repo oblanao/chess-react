@@ -1,10 +1,10 @@
 import React from 'react';
-import Diagram from '../Diagram';
+import Question from '../Question';
 
-export default function SampleDiagram() {
+export default function SampleQuestion() {
   console.log(`here`)
   return (
-    <Diagram
+    <Question
       time={15}
       onCorrect={(timeLeft) => { alert(`complete solution in ${15 - timeLeft} seconds`); window.location.reload(); }}
       onTimeout={() => { alert('timeout') }}

@@ -4,9 +4,9 @@ import './App.css';
 export default function App() {
   return(
     <div className="home-container">
-      <a href="/sample-diagram">Diagram</a>
+      <a href="/sample-question">Sample Question</a>
       <br/>
-      <a href="/quiz">Quiz</a>
+      <a href="/sample-quiz">Sample Quiz</a>
       <br/>
       <a href="/pgn-import">PGN Import</a>
       <br/>

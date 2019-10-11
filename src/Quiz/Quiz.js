@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Questions from './Questions';
 import Results from './Results';
 
-import diagrams from './diagrams';
+import diagrams from '../data/diagrams';
 
 export default class Quiz extends Component {
   constructor(props) {

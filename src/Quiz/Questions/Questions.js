@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Diagram from '../../Diagram';
+import Question from '../../Question';
 import './Questions.css';
 
 export default class Questions extends Component {
@@ -70,7 +70,7 @@ export default class Questions extends Component {
       <div className="quiz-container">
         <h3>Question no: {this.state.questionNumber} out of {this.state.totalQuestions}</h3>
         {this.state.currentQuestion &&
-          <Diagram
+          <Question
             key={this.state.questionNumber}
             time={this.props.time}
             onCorrect={this.onCorrect}
