@@ -19,6 +19,7 @@ export default class Question extends Component {
     this.updateTimeLeft = this.updateTimeLeft.bind(this)
   }
   componentDidMount() {
+    console.log(this.props)
     let game = new Chess(this.props.position)
     let fen = game.fen()
     this.setState({ game, fen }, () => {
