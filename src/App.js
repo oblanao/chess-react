@@ -10,6 +10,8 @@ export default function App() {
       <br/>
       <a href="/pgn-import">PGN Import</a>
       <br/>
+      <a href="/position-setup">Position Setup</a>
+      <br/>
     </div>
   )
 }
