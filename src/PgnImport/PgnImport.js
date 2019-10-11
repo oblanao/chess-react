@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import DiagramViewer from './DiagramViewer';
-import './FileImport.css';
+import './PgnImport.css';
 import samplePgn from './samplePgn.js';
 
 const Chess = require('chess.js');
 
-export default class FileImport extends Component {
+export default class PgnImport extends Component {
   constructor(props) {
     super(props);
     this.state = {

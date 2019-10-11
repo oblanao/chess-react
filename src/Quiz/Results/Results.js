@@ -10,7 +10,6 @@ export default class Results extends Component {
     if (!this.props.data) {
       return false
     }
-    console.log(this.props.data.results)
     const finalResults = this.props.data.results.map(result => {
       if (result.timeSpent === this.props.data.time) {
         result.timeout = true
