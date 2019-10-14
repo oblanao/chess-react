@@ -24,9 +24,14 @@ export default class PgnImport extends Component {
     let pgnString = document.getElementById('pgn-string').value;
     const curedPgn = utils.pgn.cure(pgnString);
     let splitPgns = utils.pgn.splitGames(curedPgn)
-    this.setState({
-      pgns: splitPgns
-    })
+    if (splitPgns.length) {
+      this.setState({
+        pgns: splitPgns
+      })
+    }
+    else {
+      alert('No valid games parsed! Please try again.')
+    }
   }
   render() {
     return (
