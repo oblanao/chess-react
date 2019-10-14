@@ -16,15 +16,14 @@ export default class Results extends Component {
     let totalTimeouts = 0;
     const finalAnswers = this.props.data.results.map(result => {
       totalTimeSpent += result.timeSpent;
+      if (result.correct) {
+        totalCorrect++;
+      } else {
+        totalIncorrect++;
+      }
       if (result.timeSpent === this.props.data.time) {
         totalTimeouts++;
         result.timeout = true
-      } else {
-        if (result.correct) {
-          totalCorrect++;
-        } else {
-          totalIncorrect++;
-        }
       }
       return result
     })
