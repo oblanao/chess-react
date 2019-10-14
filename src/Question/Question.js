@@ -140,10 +140,10 @@ export default class Question extends Component {
   render() {
     return (
       <div className="question-container">
-        <h5>{this.state.toMove}</h5>
         <p>{this.props.text}</p>
         <Chessboard orientation={this.state.orientation} allowDrag={this.allowDrag} onDrop={this.onDrop} position={this.state.fen} />
-        <p>Time left: {this.state.timeLeft} seconds</p>
+        <h5>{this.state.toMove}</h5>
+        <p className="time-left">Time left: {this.state.timeLeft} seconds</p>
       </div>
     )
   }
