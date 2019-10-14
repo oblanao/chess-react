@@ -1,4 +1,7 @@
 module.exports = {
+  fen: {
+    isAlreadyConstructed: fen => fen.split(" ").length === 6
+  },
   pgn: {
     cure: str => str.split('{[#]} ').join(''),
     splitGames: str => str.split('[Event "?"]').map(str => `[Event "?"]${str}`).slice(1),
@@ -28,6 +31,8 @@ module.exports = {
   },
   game: {
     isValidGame: (game) => {
+      console.log(`game`)
+      console.log(game)
       if (!game) {
         console.log(`!game`)
         return false
@@ -39,6 +44,7 @@ module.exports = {
           return false
         }
         let moves = game.moves();
+        console.log(`moves`, moves)
         if (moves.length) {
           return true
         }

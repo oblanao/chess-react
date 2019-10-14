@@ -3,6 +3,7 @@ import Chessboard from 'chessboardjsx';
 import './PositionSetup.css';
 
 import { objToFen, START_FEN, CLEAR_FEN } from '../helpers';
+import utils from '../utils';
 
 export default function BoardSetup(props) {
   const [sideToMove, setSideToMove] = useState('w')
@@ -30,7 +31,10 @@ export default function BoardSetup(props) {
   }
   function constructFen() {
     let fullFen = fen || START_FEN;
-    console.log(`fen, ${fen}`)
+    console.log(fullFen)
+    if (utils.fen.isAlreadyConstructed(fullFen)) {
+      return fullFen
+    }
     // Add side to move
     fullFen += ` ${sideToMove}`;
     // Add castling
