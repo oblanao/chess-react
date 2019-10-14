@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import Chessboard from 'chessboardjsx';
 import Chess from 'chess.js';
 import './SolutionSetup.css';
+import utils from '../utils';
 
 export default class SolutionSetup extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class SolutionSetup extends Component {
       game: null,
       fen: '',
       toMove: null,
+      orientation: ''
     }
     this.allowDrag = this.allowDrag.bind(this);
     this.onDrop = this.onDrop.bind(this);
@@ -17,13 +19,12 @@ export default class SolutionSetup extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.game)
-    let game = this.props.game
-    let fen = game.fen()
-    console.log(`aici fen ${fen}`)
+    let game = new Chess();
+    game.load(this.props.fen)
+    const fen = game.fen();
     this.setState({ game, fen }, () => {
-      this.setOrientation()
-      this.updateToMove()
+      this.setOrientation();
+      this.updateToMove();
     })
   }
   setOrientation() {
@@ -92,7 +93,13 @@ export default class SolutionSetup extends Component {
     console.log(`fen now: ${this.state.fen}`)
   }
   onSubmit() {
-    this.props.onSubmit(this.state.game);
+    const turn = this.state.game.turn();
+    const orientation = this.state.orientation;
+    if (turn === 'b' && orientation === 'white' || turn === 'w' && orientation === 'black') {
+      this.props.onSubmit(this.state.game);
+    } else {
+      alert(`Solution incomplete. Last move should be ${orientation}'s.`)
+    }
   }
   render() {
     return (
@@ -101,7 +108,7 @@ export default class SolutionSetup extends Component {
         <Chessboard orientation={this.state.orientation} allowDrag={this.allowDrag} onDrop={this.onDrop} key={this.state.fen} position={this.state.fen} />
         <div className="solutionSetup-extras-container">
           <h4>Solution entered: </h4>
-          <p>{this.state.game && this.state.game.history()}</p>
+          <p>{this.state.game && utils.pgn.renderHistory(this.state.game.history(), this.state.orientation === 'white' ? 'w' : 'b')}</p>
           <button onClick={this.undo}>Undo</button>
           <button onClick={this.onSubmit}>Submit</button>
         </div>

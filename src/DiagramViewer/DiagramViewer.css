@@ -20,4 +20,9 @@
   margin: 5px 0px;
   border: 0px;
   font-size: 1.5rem;
+  text-align: center;
+}
+
+.smaller-text {
+  font-size: 1rem;
 }

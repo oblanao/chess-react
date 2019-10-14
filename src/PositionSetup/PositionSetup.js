@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import Chess from 'chess.js';
+
+import DiagramViewer from '../DiagramViewer';
 import BoardSetup from './BoardSetup';
 import SolutionSetup from './SolutionSetup';
-
-import Chess from 'chess.js';
 import './PositionSetup.css';
 
-import { objToFen, START_FEN, CLEAR_FEN } from '../helpers';
-import DiagramViewer from '../DiagramViewer';
+import utils from '../utils';
 
 export default function PositionSetup(props) {
   const [game, setGame] = useState(null);
@@ -14,10 +14,15 @@ export default function PositionSetup(props) {
   const [pgn, setPgn] = useState('');
   const [stage, setStage] = useState('board')
   function onBoardSubmit(boardFen) {
-    setFen(boardFen);
-    const game = new Chess(boardFen);
-    setGame(game);
-    setStage('solution')
+    const newGame = new Chess(boardFen);
+    if (utils.game.isValidGame(newGame)) {
+      setFen(boardFen);
+      setGame(newGame);
+      setPgn(newGame.pgn())
+      setStage('solution')
+    } else {
+      alert('Invalid game!')
+    }
   }
   function onFinalSubmit(game) {
     setPgn(game.pgn())
@@ -37,7 +42,7 @@ export default function PositionSetup(props) {
             <BoardSetup fen={fen} onSubmit={onBoardSubmit} />
             :
             stage === 'solution' ?
-              <SolutionSetup onSubmit={onFinalSubmit} game={game} />
+              <SolutionSetup onSubmit={onFinalSubmit} fen={fen} pgn={pgn} />
               :
               <DiagramViewer pgn={pgn} />
         }
