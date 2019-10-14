@@ -38,14 +38,17 @@ export default class Questions extends Component {
     }
     return answser
   }
-  updateAnswers(timeLeft, correct) {
-    const answser = this.makeAnswer(timeLeft, correct);
+  updateAnswers(timeLeft, correct, solutionProgress) {
+    const answer = this.makeAnswer(timeLeft, correct);
+    if (typeof solutionProgress !== 'undefined') {
+      answer.solutionProgress = solutionProgress
+    }
     const newAnswers = this.state.answers;
-    newAnswers.push(answser);
+    newAnswers.push(answer);
     this.setState({ answers: newAnswers })
   }
-  updateGame(timeLeft, correct) {
-    this.updateAnswers(timeLeft, correct);
+  updateGame(timeLeft, correct, solutionProgress) {
+    this.updateAnswers(timeLeft, correct, solutionProgress);
     if (this.isQuizFinished()) {
       let finalResults = {
         results: this.state.answers,
@@ -55,17 +58,16 @@ export default class Questions extends Component {
     }
     this.updateData()
   }
-  onCorrect(timeLeft) {
-    this.updateGame(timeLeft, true)
+  onCorrect(timeLeft, solutionProgress) {
+    this.updateGame(timeLeft, true, solutionProgress)
   }
-  onTimeout() {
-    this.updateGame(0, false)
+  onTimeout(solutionProgress) {
+    this.updateGame(0, false, solutionProgress)
   }
-  onWrongMove(timeLeft) {
-    this.updateGame(timeLeft, false)
+  onWrongMove(timeLeft, solutionProgress) {
+    this.updateGame(timeLeft, false, solutionProgress)
   }
   render() {
-    console.log(`on quiz render, currdata`, this.state.currentQuestion)
     return (
       <div className="quiz-container">
         <h3>Question no: {this.state.questionNumber} out of {this.state.totalQuestions}</h3>

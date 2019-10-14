@@ -53,7 +53,7 @@ export default class Question extends Component {
     function checkTime() {
       if (this.state.timeLeft <= 0) {
         clearInterval(this.state.timer)
-        this.props.onTimeout && this.props.onTimeout();
+        this.props.onTimeout && this.props.onTimeout(this.state.solutionProgress);
       }
     }
     const timeLeft = Math.round(this.state.timeLeft - 1)
@@ -125,13 +125,13 @@ export default class Question extends Component {
     if (!this.isCorrectMove(moveObj)) {
       // alert('ma sugi');
       this.state.game.undo()
-      this.props.onWrongMove && this.props.onWrongMove(this.state.timeLeft)
+      this.props.onWrongMove && this.props.onWrongMove(this.state.timeLeft, this.state.solutionProgress)
       return 'snapback'
     } else {
       this.updateGame(game)
       if (this.isSolutionComplete()) {
         clearInterval(this.state.timer)
-        this.props.onCorrect && this.props.onCorrect(this.state.timeLeft)
+        this.props.onCorrect && this.props.onCorrect(this.state.timeLeft, this.state.solutionProgress)
       } else {
         this.makeAutoMove()
       }
