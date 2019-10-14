@@ -8,7 +8,6 @@ import {
 import App from './App';
 import SampleQuestion from './Question/SampleQuestion';
 import Quiz from './Quiz';
-
 import PgnImport from "./PgnImport";
 import PositionSetup from "./PositionSetup";
 
