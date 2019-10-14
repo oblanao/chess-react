@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Chess from 'chess.js';
 
-import DiagramViewer from '../DiagramViewer';
 import BoardSetup from './BoardSetup';
 import SolutionSetup from './SolutionSetup';
 import './PositionSetup.css';
 
 import utils from '../utils';
+import QuestionSetup from '../QuestionSetup/QuestionSetup';
 
 export default function PositionSetup(props) {
   const [game, setGame] = useState(null);
@@ -44,7 +44,7 @@ export default function PositionSetup(props) {
             stage === 'solution' ?
               <SolutionSetup onSubmit={onFinalSubmit} fen={fen} pgn={pgn} />
               :
-              <DiagramViewer pgn={pgn} />
+              <QuestionSetup pgn={pgn} />
         }
       </div>
       {stage === 'board' ? null : <button onClick={goBack}>&lt; GO BACK </button>}
