@@ -15,7 +15,6 @@ module.exports = {
         prefixedMoves[0] = `1. ${history[0]}`
       } else {
         prefixedMoves[0] = `1... ${history[0]}`;
-        prefixedMoves[1] = '\n'
         nextPly = 'white';
       }
       for (let i = 1; i < history.length; i++) {
