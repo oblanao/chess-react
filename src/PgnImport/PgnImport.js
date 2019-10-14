@@ -42,7 +42,7 @@ export default class PgnImport extends Component {
           <React.Fragment>
             <textarea placeholder="Paste PGN contents here..." id="pgn-string" name="pgn-string" cols="80" rows="20" />
             <br />
-            <button onClick={this.onSubmit}>Submit</button>
+            <button onClick={this.onSubmit}>Submit</button><br />
             <button onClick={this.loadSamplePgn}>Load sample PGN</button>
           </React.Fragment>
         }

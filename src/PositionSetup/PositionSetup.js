@@ -35,19 +35,21 @@ export default function PositionSetup(props) {
     setStage(stages[newIndex])
   }
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div className="positionSetup-container">
-        {
-          stage === 'board' ?
-            <BoardSetup fen={fen} onSubmit={onBoardSubmit} />
+    <div className="positionSetup-container">
+      {
+        stage === 'board' ?
+          <BoardSetup fen={fen} onSubmit={onBoardSubmit} />
+          :
+          stage === 'solution' ?
+            <SolutionSetup onSubmit={onFinalSubmit} fen={fen} pgn={pgn} />
             :
-            stage === 'solution' ?
-              <SolutionSetup onSubmit={onFinalSubmit} fen={fen} pgn={pgn} />
-              :
-              <QuestionSetup pgn={pgn} />
-        }
-      </div>
-      {stage === 'board' ? null : <button onClick={goBack}>&lt; GO BACK </button>}
+            <QuestionSetup pgn={pgn} />
+      }
+      {stage === 'board' ? null :
+        <div>
+          <button onClick={goBack}>&lt; GO BACK </button>
+        </div>
+      }
     </div>
   )
 }

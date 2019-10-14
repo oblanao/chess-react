@@ -5,7 +5,7 @@ module.exports = {
   pgn: {
     cure: str => str.split('{[#]} ').join(''),
     splitGames: str => str.split('[Event "?"]').map(str => `[Event "?"]${str}`).slice(1),
-    renderHistory: (history, sideToMove) => {
+    renderHistory: (history, sideToMove, movesPerLine = 2) => {
       if (!history.length) {
         return ''
       }
@@ -15,6 +15,7 @@ module.exports = {
         prefixedMoves[0] = `1. ${history[0]}`
       } else {
         prefixedMoves[0] = `1... ${history[0]}`;
+        prefixedMoves[1] = '\n'
         nextPly = 'white';
       }
       for (let i = 1; i < history.length; i++) {

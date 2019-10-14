@@ -104,13 +104,17 @@ export default class SolutionSetup extends Component {
   render() {
     return (
       <div className="solutionSetup-container">
-        <h5>{this.state.toMove}</h5>
-        <Chessboard orientation={this.state.orientation} allowDrag={this.allowDrag} onDrop={this.onDrop} key={this.state.fen} position={this.state.fen} />
-        <div className="solutionSetup-extras-container">
-          <h4>Solution entered: </h4>
-          <p>{this.state.game && utils.pgn.renderHistory(this.state.game.history(), this.state.orientation === 'white' ? 'w' : 'b')}</p>
-          <button onClick={this.undo}>Undo</button>
-          <button onClick={this.onSubmit}>Submit</button>
+        <div className="main-container">
+          <p>{this.state.toMove}</p>
+          <Chessboard orientation={this.state.orientation} allowDrag={this.allowDrag} onDrop={this.onDrop} key={this.state.fen} position={this.state.fen} />
+        </div>
+        <div className="extras-container">
+          <p>Solution entered: </p>
+          <p className="solution-text">{this.state.game && utils.pgn.renderHistory(this.state.game.history(), this.state.orientation === 'white' ? 'w' : 'b')}</p>
+          <div className="solution-buttons">
+            <button onClick={this.undo}>Undo</button>
+            <button onClick={this.onSubmit}>Submit</button>
+          </div>
         </div>
       </div>
     )

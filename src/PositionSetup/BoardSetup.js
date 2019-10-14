@@ -56,16 +56,17 @@ export default function BoardSetup(props) {
     setFen(START_FEN)
   }
   return (
-    <div className="positionSetup-container">
-      <Chessboard
-        position={fen}
-        dropOffBoard="trash"
-        getPosition={getPosition}
-        sparePieces={true}
-        transitionDuration={0}
-      />
-
-      <div className="positionSetup-extras-container">
+    <div className="boardSetup-container">
+      <div className="main-container">
+        <Chessboard
+          position={fen}
+          dropOffBoard="trash"
+          getPosition={getPosition}
+          sparePieces={true}
+          transitionDuration={0}
+        />
+      </div>
+      <div className="extras-container">
 
         Side to move
         <form>
@@ -89,14 +90,17 @@ export default function BoardSetup(props) {
               <input type="checkbox" name="K" onChange={handleCastlesChange} checked={castles.K} />
               White 0-0
             </label>
+            <br />
             <label>
               <input type="checkbox" name="Q" onChange={handleCastlesChange} checked={castles.Q} />
               White 0-0-0
-            </label><br />
+            </label>
+            <br />
             <label>
               <input type="checkbox" name="k" onChange={handleCastlesChange} checked={castles.k} />
               Black 0-0
             </label>
+            <br />
             <label>
               <input type="checkbox" name="q" onChange={handleCastlesChange} checked={castles.q} />
               Black 0-0-0
@@ -104,11 +108,10 @@ export default function BoardSetup(props) {
           </div>
         </form>
         <div className="buttons-container">
-          <button onClick={clearPosition}>Clear Board</button>
-          <button onClick={startPosition}>Start Position</button>
+          <button id="button-clearBoard" onClick={clearPosition}>Clear Board</button>
+          <button id="button-startPosition" onClick={startPosition}>Start Position</button><br />
           <button onClick={() => props.onSubmit(constructFen())}>Submit</button>
         </div>
-
       </div>
     </div>
   )
