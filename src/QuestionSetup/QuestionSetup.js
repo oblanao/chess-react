@@ -25,7 +25,7 @@ export default class QuestionSetup extends Component {
   render() {
     return (
       <div className="questionSetup-container">
-        <DiagramViewer pgn={this.props.pgn} />
+        <DiagramViewer {...this.props} />
         <div className="questionSetup-extras">
           Title
           <input type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Question title..." /><br />
