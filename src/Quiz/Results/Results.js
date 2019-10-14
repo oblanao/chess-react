@@ -10,15 +10,31 @@ export default class Results extends Component {
     if (!this.props.data) {
       return false
     }
-    const finalResults = this.props.data.results.map(result => {
+    let totalTimeSpent = 0;
+    let totalCorrect = 0;
+    let totalIncorrect = 0;
+    let totalTimeouts = 0;
+    const finalAnswers = this.props.data.results.map(result => {
+      totalTimeSpent += result.timeSpent;
       if (result.timeSpent === this.props.data.time) {
+        totalTimeouts++;
         result.timeout = true
+      } else {
+        if (result.correct) {
+          totalCorrect++;
+        } else {
+          totalIncorrect++;
+        }
       }
       return result
     })
     return {
-      time: this.props.data.time,
-      finalResults
+      timePerQuestion: this.props.data.time,
+      totalTimeSpent,
+      totalCorrect,
+      totalIncorrect,
+      totalTimeouts,
+      finalAnswers
     }
   }
   render() {
