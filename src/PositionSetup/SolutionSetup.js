@@ -3,6 +3,7 @@ import Chessboard from 'chessboardjsx';
 import Chess from 'chess.js';
 import './SolutionSetup.css';
 import utils from '../utils';
+import DiagramHistory from '../DiagramHistory/DiagramHistory';
 
 export default class SolutionSetup extends Component {
   constructor(props) {
@@ -109,8 +110,13 @@ export default class SolutionSetup extends Component {
           <Chessboard orientation={this.state.orientation} allowDrag={this.allowDrag} onDrop={this.onDrop} key={this.state.fen} position={this.state.fen} />
         </div>
         <div className="extras-container">
-          <p>Solution entered: </p>
-          <p className="solution-text">{this.state.game && utils.pgn.renderHistory(this.state.game.history(), this.state.orientation === 'white' ? 'w' : 'b')}</p>
+          {this.state.game &&
+            <DiagramHistory
+              title={"Solution entered"}
+              height={300}
+              history={this.state.game.history()}
+              sideToMove={this.state.orientation === 'white' ? 'w' : 'b'}
+            />}
           <div className="solution-buttons">
             <button onClick={this.undo}>Undo</button>
             <button onClick={this.onSubmit}>Submit</button>

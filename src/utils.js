@@ -1,20 +1,23 @@
-module.exports = {
+import React from 'react';
+
+const utils = {
   fen: {
     isAlreadyConstructed: fen => fen.split(" ").length === 6
   },
   pgn: {
     cure: str => str.split('{[#]} ').join(''),
     splitGames: str => str.split('[Event "?"]').map(str => `[Event "?"]${str}`).slice(1),
-    renderHistory: (history, sideToMove, movesPerLine = 2) => {
+    getPrefixedMoves: (history, sideToMove, movesPerLine = 2) => {
       if (!history.length) {
         return ''
       }
       let prefixedMoves = [];
       let nextPly = 'black';
       if (sideToMove === 'w') {
-        prefixedMoves[0] = `1. ${history[0]}`
+        prefixedMoves.push(`1. ${history[0]}`)
       } else {
-        prefixedMoves[0] = `1... ${history[0]}`;
+        prefixedMoves.push(' ');
+        prefixedMoves.push(`1... ${history[0]}`);
         nextPly = 'white';
       }
       for (let i = 1; i < history.length; i++) {
@@ -26,8 +29,19 @@ module.exports = {
           nextPly = 'white'
         }
       }
-      return prefixedMoves.join(" ")
-    }
+      return prefixedMoves
+    },
+    getNotationJSX: (prefixedMoves, style = 'table') => {
+      let element = [];
+      if (style === 'table') {
+        for (let i = 0; i < prefixedMoves.length; i += 2) {
+          element.push(<tr key={`tr-${i}-${prefixedMoves[i]}`}><td>{prefixedMoves[i]}</td>{i < prefixedMoves.length - 1 && <td>{prefixedMoves[i + 1]}</td>}</tr>)
+        }
+      } else {
+        element = prefixedMoves.join(" ");
+      }
+      return element;
+    },
   },
   game: {
     isValidGame: (game) => {
@@ -56,3 +70,5 @@ module.exports = {
     }
   }
 }
+
+export default utils;

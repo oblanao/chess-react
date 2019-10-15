@@ -4,6 +4,7 @@ import Chessboard from 'chessboardjsx';
 import utils from '../utils';
 
 import './DiagramViewer.css';
+import DiagramHistory from '../DiagramHistory/DiagramHistory';
 
 export default class DiagramViewer extends Component {
   constructor(props) {
@@ -68,7 +69,13 @@ export default class DiagramViewer extends Component {
               orientation={this.state.orientation}
             />
             <p>{this.state.sideToMove}</p>
-            <p className="smaller-text">{this.state.game && utils.pgn.renderHistory(this.state.history, this.state.turn)}</p>
+            {/* <p className="smaller-text">{this.state.game && utils.pgn.renderHistory(this.state.history, this.state.turn)}</p> */}
+            {this.state.game &&
+              <DiagramHistory
+                notationStyle={"simple"}
+                history={this.state.history}
+                sideToMove={this.state.turn}
+              />}
           </React.Fragment>
         }
       </div>

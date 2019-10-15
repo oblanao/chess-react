@@ -1,0 +1,12 @@
+.diagramHistory-tableContainer {
+  width: 175px;
+  padding: 5px 12.5px;
+}
+
+.diagramHistory-tableContainer td {
+  width: 75px;
+}
+
+.showYScroll {
+  overflow-y: scroll;
+}
