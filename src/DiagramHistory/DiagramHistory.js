@@ -16,23 +16,19 @@ export default function DiagramHistory(props) {
     setMoves(prefixedMoves);
     if (prefixedMoves.length) {
       const jsxEl = utils.pgn.getNotationJSX(prefixedMoves, props.notationStyle)
-      console.log(`jsxEl`, jsxEl)
       setElement(jsxEl);
       // If more than 5 lines, scroll to bottom
-      if (shouldShowScroll()) {
+      if (props.notationStyle !== 'simple' && moves.length >= 9) {
         scrollToBottom()
       }
     }
-  }, [props.history])
+  }, [props, moves.length])
   function scrollToBottom() {
-    let element = document.querySelector('.mainContainer');
+    let element = document.querySelector('.diagramHistory-mainContainer');
     element.scrollTop = element.scrollHeight;
   }
-  function shouldShowScroll() {
-    return props.notationStyle !== 'simple' && moves.length >= 9
-  }
   function getScrollClass() {
-    return shouldShowScroll() ? 'showYScroll' : ''
+    return props.notationStyle !== 'simple' && moves.length >= 9 ? 'showYScroll' : ''
   }
   function getDivClass() {
     return props.notationStyle === 'simple' ? 'diagramHistory-simpleContainer' : 'diagramHistory-tableContainer'
@@ -41,7 +37,7 @@ export default function DiagramHistory(props) {
     return `${getDivClass()} ${getScrollClass()}`
   }
   return (
-    <div className={`mainContainer ${getContainerClass()}`} style={props.height && { height: props.height }}>
+    <div className={`diagramHistory-mainContainer ${getContainerClass()}`} style={props.height && { height: props.height }}>
       {props.title && <p>{props.title}</p>}
       {props.notationStyle === "simple" ?
         <p>{element}</p>

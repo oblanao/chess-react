@@ -45,20 +45,15 @@ const utils = {
   },
   game: {
     isValidGame: (game) => {
-      console.log(`game`)
-      console.log(game)
       if (!game) {
-        console.log(`!game`)
         return false
       }
       // Try catch to check for kings on the table
       try {
         if (game.game_over()) {
-          console.log(`gameOver`)
           return false
         }
         let moves = game.moves();
-        console.log(`moves`, moves)
         if (moves.length) {
           return true
         }

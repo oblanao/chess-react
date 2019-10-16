@@ -9,7 +9,7 @@ import utils from '../utils';
 import QuestionSetup from '../QuestionSetup/QuestionSetup';
 
 export default function PositionSetup(props) {
-  const [game, setGame] = useState(null);
+  // const [game, setGame] = useState(null);
   const [fen, setFen] = useState('');
   const [pgn, setPgn] = useState('');
   const [stage, setStage] = useState('board')
@@ -17,7 +17,7 @@ export default function PositionSetup(props) {
     const newGame = new Chess(boardFen);
     if (utils.game.isValidGame(newGame)) {
       setFen(boardFen);
-      setGame(newGame);
+      // setGame(newGame);
       setPgn(newGame.pgn())
       setStage('solution')
     } else {

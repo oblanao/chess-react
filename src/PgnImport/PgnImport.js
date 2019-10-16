@@ -6,8 +6,6 @@ import './PgnImport.css';
 import samplePgn from '../data/samplePgn.js';
 import utils from '../utils';
 
-const Chess = require('chess.js');
-
 export default class PgnImport extends Component {
   constructor(props) {
     super(props);

@@ -1,8 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Chessboard from 'chessboardjsx';
 import Chess from 'chess.js';
 import './SolutionSetup.css';
-import utils from '../utils';
 import DiagramHistory from '../DiagramHistory/DiagramHistory';
 
 export default class SolutionSetup extends Component {
@@ -96,7 +95,7 @@ export default class SolutionSetup extends Component {
   onSubmit() {
     const turn = this.state.game.turn();
     const orientation = this.state.orientation;
-    if (turn === 'b' && orientation === 'white' || turn === 'w' && orientation === 'black') {
+    if ((turn === 'b' && orientation === 'white') || (turn === 'w' && orientation === 'black')) {
       this.props.onSubmit(this.state.game);
     } else {
       alert(`Solution incomplete. Last move should be ${orientation}'s.`)

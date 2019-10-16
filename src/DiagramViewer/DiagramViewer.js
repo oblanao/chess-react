@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Chess from 'chess.js';
 import Chessboard from 'chessboardjsx';
-import utils from '../utils';
 
 import './DiagramViewer.css';
 import DiagramHistory from '../DiagramHistory/DiagramHistory';

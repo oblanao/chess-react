@@ -31,7 +31,6 @@ export default function BoardSetup(props) {
   }
   function constructFen() {
     let fullFen = fen || START_FEN;
-    console.log(fullFen)
     if (utils.fen.isAlreadyConstructed(fullFen)) {
       return fullFen
     }
