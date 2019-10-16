@@ -31,15 +31,11 @@ export default function GameReplayer(props) {
     console.log(`event`, event.target)
     const moveElements = document.getElementsByTagName('td');
     for (let i = 0; i < moveElements.length; i++) {
-      moveElements[i].style = {
-        backgroundColor: 'none',
-        color: 'black'
-      }
+      moveElements[i].style.background = '';
+      moveElements[i].style.color = 'black';
     }
-    event.target.style = {
-      backgroundColor: 'black',
-      color: 'white'
-    }
+    event.target.style.background = 'black';
+    event.target.style.color = 'white';
     const moveDiff = currentMove - moveIndex;
     if (moveDiff > 0) {
       for (let i = 0; i < moveDiff; i++) {

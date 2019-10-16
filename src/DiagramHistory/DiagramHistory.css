@@ -20,3 +20,7 @@
 .showYScroll {
   overflow-y: scroll;
 }
+
+.diagramHistory-move {
+  cursor: pointer;
+}

@@ -35,7 +35,7 @@ const utils = {
       let element = [];
       if (style === 'table') {
         for (let i = 0; i < prefixedMoves.length; i += 2) {
-          element.push(<tr key={`tr-${i}-${prefixedMoves[i]}`}><td onClick={(e) => onClick(i, e)}>{prefixedMoves[i]}</td>{i < prefixedMoves.length - 1 && <td onClick={(e) => onClick(i + 1, e)}>{prefixedMoves[i + 1]}</td>}</tr>)
+          element.push(<tr key={`tr-${i}-${prefixedMoves[i]}`}><td className="diagramHistory-move" onClick={(e) => onClick(i, e)}>{prefixedMoves[i]}</td>{i < prefixedMoves.length - 1 && <td className="diagramHistory-move" onClick={(e) => onClick(i + 1, e)}>{prefixedMoves[i + 1]}</td>}</tr>)
         }
       } else {
         element = prefixedMoves.join(" ");
