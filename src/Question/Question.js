@@ -123,7 +123,6 @@ export default class Question extends Component {
       return 'snapback'
     }
     if (!this.isCorrectMove(moveObj)) {
-      // alert('ma sugi');
       this.state.game.undo()
       this.props.onWrongMove && this.props.onWrongMove(this.state.timeLeft, this.state.solutionProgress)
       return 'snapback'
