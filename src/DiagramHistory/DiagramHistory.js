@@ -15,7 +15,7 @@ export default function DiagramHistory(props) {
     const prefixedMoves = utils.pgn.getPrefixedMoves(history, sideToMove, movesPerLine);
     setMoves(prefixedMoves);
     if (prefixedMoves.length) {
-      const jsxEl = utils.pgn.getNotationJSX(prefixedMoves, props.notationStyle)
+      const jsxEl = utils.pgn.getNotationJSX(prefixedMoves, onMoveClick, props.notationStyle)
       setElement(jsxEl);
       // If more than 5 lines, scroll to bottom
       if (props.notationStyle !== 'simple' && moves.length >= 9) {
@@ -23,6 +23,9 @@ export default function DiagramHistory(props) {
       }
     }
   }, [props, moves.length])
+  function onMoveClick(moveIndex, event) {
+    props.onMoveClick && props.onMoveClick(moveIndex, event)
+  }
   function scrollToBottom() {
     let element = document.querySelector('.diagramHistory-mainContainer');
     element.scrollTop = element.scrollHeight;

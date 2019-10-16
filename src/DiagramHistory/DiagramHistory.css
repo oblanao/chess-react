@@ -1,10 +1,20 @@
+.diagramHistory-mainContainer {
+  box-sizing: border-box;
+}
 .diagramHistory-tableContainer {
-  width: 175px;
-  padding: 5px 12.5px;
+  width: 240px;
+  padding: 5px 20px;
 }
 
 .diagramHistory-tableContainer td {
-  width: 75px;
+  width: 100px;
+}
+
+.diagramHistory-tableContainer tr > td:first-child {
+  text-align: left;
+}
+.diagramHistory-tableContainer tr > td:not(:first-child) {
+  text-align: right;
 }
 
 .showYScroll {

@@ -10,6 +10,9 @@ import SampleQuestion from './Question/SampleQuestion';
 import Quiz from './Quiz';
 import PgnImport from "./PgnImport";
 import PositionSetup from "./PositionSetup";
+import GameReplayer from './GameReplayer';
+
+import sampleGame from './sampleGame';
 
 export default function Main() {
   return (
@@ -29,6 +32,9 @@ export default function Main() {
         </Route>
         <Route path="/position-setup">
           <PositionSetup />
+        </Route>
+        <Route path="/game-replayer">
+          <GameReplayer game={sampleGame} />
         </Route>
         <Route path="*">
           <p>404 - Not Found</p>

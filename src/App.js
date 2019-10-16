@@ -10,6 +10,7 @@ export default function App() {
         <a href="/sample-quiz">Sample Quiz</a>
         <a href="/pgn-import">PGN Import</a>
         <a href="/position-setup">Position Setup</a>
+        <a href="/game-replayer">Game Replayer</a>
       </div>
     </div>
   )
