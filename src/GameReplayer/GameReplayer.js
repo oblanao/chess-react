@@ -27,23 +27,13 @@ export default function GameReplayer(props) {
     }
   }
   function onMoveClick(moveIndex) {
-    moveIndex++;
-    const moveDiff = currentMove - moveIndex;
-    if (moveDiff > 0) {
-      for (let i = 0; i < moveDiff - 1; i++) {
-        game.undo();
-      }
-      setCurrentMove(moveIndex)
-      setGame(game);
-      setFen(game.fen())
-    } else if (moveDiff < 0) {
-      for (let i = currentMove; i < moveIndex; i++) {
-        game.move(props.game.history()[i])
-      }
-      setCurrentMove(moveIndex);
-      setGame(game);
-      setFen(game.fen())
+    setCurrentMove(moveIndex + 1)
+    const newGame = new Chess();
+    for (let i = 0; i <= moveIndex; i++) {
+      newGame.move(props.game.history()[i])
     }
+    setGame(newGame);
+    setFen(newGame.fen())
   }
   return (
     <div>
