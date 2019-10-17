@@ -21,10 +21,25 @@ export default function DiagramHistory(props) {
       if (props.notationStyle !== 'simple' && moves.length >= 9) {
         scrollToBottom()
       }
+      const moveElements = document.getElementsByTagName('td');
+      for (let i = 0; i < moveElements.length; i++) {
+        if (i === props.currentMove - 1) {
+          moveElements[i].style.background = 'black';
+          moveElements[i].style.color = 'white';
+        } else {
+          moveElements[i].style.background = '';
+          moveElements[i].style.color = 'black';
+        }
+      }
+      // const currentMoveEl = moveElements[props.currentMove];
+      // if (currentMoveEl) {
+      //   currentMoveEl.style.background = 'black';
+      //   currentMoveEl.style.color = 'white';
+      // }
     }
   }, [props, moves.length])
-  function onMoveClick(moveIndex, event) {
-    props.onMoveClick && props.onMoveClick(moveIndex, event)
+  function onMoveClick(moveIndex) {
+    props.onMoveClick && props.onMoveClick(moveIndex)
   }
   function scrollToBottom() {
     let element = document.querySelector('.diagramHistory-mainContainer');
