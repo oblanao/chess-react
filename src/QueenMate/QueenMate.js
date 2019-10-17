@@ -12,7 +12,7 @@ export default class QueenMate extends Component {
       toMove: 'White to Move',
       orientation: 'white',
       timer: null,
-      initialTime: 300,
+      initialTime: 60,
       timeLeft: 60,
       numMoves: 0,
       missedMate: 0,
@@ -58,6 +58,7 @@ export default class QueenMate extends Component {
     return !!this.state.game.in_checkmate()
   }
   onCorrect() {
+    clearInterval(this.state.timer)
     this.setState({
       results: {
         timeSpent: this.state.initialTime - this.state.timeLeft,
@@ -73,6 +74,7 @@ export default class QueenMate extends Component {
     console.log(this.state)
   }
   onGameOver() {
+    clearInterval(this.state.timer);
     let reason = null;
     if (this.state.game.in_draw()) {
       reason = 'In draw. Insufficient material'
