@@ -64,6 +64,8 @@ export default class QueenMate extends Component {
         missedMate: this.state.missedMate,
         numMoves: Math.ceil((this.state.numMoves + 1) / 2),
         numPlies: this.state.numMoves + 1,
+        moves: this.state.game.history(),
+        didMate: true,
       },
       stage: 'results',
       toMove: ''
@@ -85,8 +87,9 @@ export default class QueenMate extends Component {
       results: {
         timeSpent: this.state.initialTime - this.state.timeLeft,
         missedMate: this.state.missedMate,
-        numMoves: Math.ceil((this.state.numMoves + 1) / 2),
-        numPlies: this.state.numMoves + 1,
+        numMoves: this.state.numMoves/2,
+        numPlies: this.state.numMoves,
+        moves: this.state.game.history(),        
         didMate: false,
         reason,
       },
@@ -107,13 +110,18 @@ export default class QueenMate extends Component {
       const randomNum = unixTime % len;
       return arr[randomNum]
     }
-    async function wait(ms) {
-      await setTimeout(null, ms)
-    }
+    function wait(ms) {
+      return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms)
+      })
+    } 
     const moveToMake = randomEl(game.moves())
-    await wait(500);
     game.move(moveToMake)
     this.updateGame(game)
+    if (game.game_over()) {
+      await wait(1000)
+      this.onGameOver()
+    }
   }
   allowDrag(piece, source) {
     const { game } = this.state;
