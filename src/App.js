@@ -12,6 +12,7 @@ export default function App() {
         <a href="/position-setup">Position Setup</a>
         <a href="/game-replayer">Game Replayer</a>
         <a href="/queen-mate">Queen Mate Test</a>
+        <a href="/diagram-viewer">Diagram Viewer</a>
       </div>
     </div>
   )

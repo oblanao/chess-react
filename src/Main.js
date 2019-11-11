@@ -14,6 +14,7 @@ import GameReplayer from './GameReplayer';
 import QueenMate from './QueenMate';
 
 import sampleGame from './sampleGame';
+import DiagramViewer from "./DiagramViewer";
 
 export default function Main() {
   return (
@@ -39,6 +40,13 @@ export default function Main() {
         </Route>
         <Route path="/queen-mate">
           <QueenMate />
+        </Route>
+        <Route path="/diagram-viewer">
+          <React.Fragment>
+            <DiagramViewer pgn={"124czx 1245dbfyutg"} />
+            <DiagramViewer pgn={"1.e4 e5"} />
+
+          </React.Fragment>
         </Route>
         <Route path="*">
           <p>404 - Not Found</p>
