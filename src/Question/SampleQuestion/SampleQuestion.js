@@ -9,7 +9,7 @@ export default function SampleQuestion() {
   }
   return (
     <Question
-      time={15}
+      // time={15}
       onWrongMove={onWrongMove}
       onCorrect={(timeLeft) => { alert(`After ${numWrongs + 1} tries, complete solution in ${15 - timeLeft} seconds`); window.location.reload(); }}
       onTimeout={() => { alert('timeout') }}

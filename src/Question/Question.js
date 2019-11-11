@@ -14,9 +14,14 @@ export default class Question extends Component {
       timer: null,
       timeLeft: <span>&infin;</span>
     }
+
+    this.boardMoveSound = new Audio("sounds/board-move.wav");
+    this.solutionCompleteSound = new Audio("sounds/solution-complete.wav");
+
     this.allowDrag = this.allowDrag.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.updateTimeLeft = this.updateTimeLeft.bind(this)
+    this.playSound = this.playSound.bind(this);
   }
   componentDidMount() {
     console.log(this.props)
@@ -81,11 +86,12 @@ export default class Question extends Component {
   isSolutionComplete() {
     return this.state.solutionProgress === this.props.solution.length
   }
-  makeAutoMove() {
+  async makeAutoMove() {
     const { game } = this.state;
     const moveToMake = this.props.solution[this.state.solutionProgress]
     game.move(moveToMake);
-    this.updateGame(game)
+    await this.updateGame(game)
+    setTimeout(() => this.playSound(this.boardMoveSound), 500)
   }
   allowDrag(piece, source) {
     const { game } = this.state;
@@ -98,6 +104,14 @@ export default class Question extends Component {
     }
     return true
   }
+  playSound(theSound) {
+    console.log(`playing sound with theSound `, theSound)
+    return new Promise((resolve, reject) => {
+      const newAudio = theSound.cloneNode(true);
+      newAudio.onended = resolve
+      newAudio.play();
+    })
+  }
   updateGame(game) {
     this.setState({ game }, () => {
       this.setState({ fen: game.fen() }, () => {
@@ -105,7 +119,8 @@ export default class Question extends Component {
       })
     })
   }
-  onDrop(moveObj) {
+  async onDrop(moveObj) {
+    this.playSound(this.boardMoveSound);
     console.log(moveObj)
     let { game } = this.state;
     const source = moveObj.sourceSquare;
@@ -130,6 +145,7 @@ export default class Question extends Component {
       this.updateGame(game)
       if (this.isSolutionComplete()) {
         clearInterval(this.state.timer)
+        await this.playSound(this.solutionCompleteSound)
         this.props.onCorrect && this.props.onCorrect(this.state.timeLeft, this.state.solutionProgress)
       } else {
         this.makeAutoMove()
