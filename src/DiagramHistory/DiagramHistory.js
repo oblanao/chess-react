@@ -7,8 +7,6 @@ export default function DiagramHistory(props) {
   const [element, setElement] = useState(null)
   const [moves, setMoves] = useState([])
   useEffect(() => {
-    console.log(`DiagramHistory useEffect`)
-    console.log(`history: `, props.history)
     const {
       history,
       sideToMove
@@ -39,7 +37,7 @@ export default function DiagramHistory(props) {
     //   currentMoveEl.style.color = 'white';
     // }
     // }
-  }, [props, moves.length])
+  }, [props.history, props.sideToMove, props.notationStyle])
   function onMoveClick(moveIndex) {
     props.onMoveClick && props.onMoveClick(moveIndex)
   }

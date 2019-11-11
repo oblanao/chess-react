@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chessboard from 'chessboardjsx';
 import Chess from 'chess.js';
 import { START_FEN } from '../helpers';
@@ -10,6 +10,25 @@ export default function GameReplayer(props) {
   const [fen, setFen] = useState(START_FEN);
   const [game, setGame] = useState(new Chess());
   const [currentMove, setCurrentMove] = useState(0);
+
+  const onKeyDown = (e) => {
+    if (e.key === 'ArrowLeft') {
+      toPrevMove();
+    } else if (e.key === 'ArrowRight') {
+      toNextMove();
+    }
+  }
+  // useEffect(() => {
+  //   console.log(`useEffect`)
+  //   document.addEventListener("keydown", (e) => {
+  //     if (e.key === 'ArrowLeft') {
+  //       toPrevMove();
+  //     } else if (e.key === 'ArrowRight') {
+  //       toNextMove();
+  //     }
+  //   })
+  // })
+
   function toPrevMove() {
     if (currentMove > 0) {
       game.undo();
@@ -36,7 +55,7 @@ export default function GameReplayer(props) {
     setFen(newGame.fen())
   }
   return (
-    <div>
+    <div onKeyDown={onKeyDown}>
       <div className="gameReplayer-container">
         <div className="boardContainer">
           <Chessboard position={fen} key={fen} draggable={false} />
