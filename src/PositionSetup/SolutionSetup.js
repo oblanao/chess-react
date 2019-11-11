@@ -21,6 +21,8 @@ export default class SolutionSetup extends Component {
   componentDidMount() {
     let game = new Chess();
     game.load(this.props.fen)
+    game.load_pgn(this.props.pgn)
+    game.undo() // Keep orientation correct
     const fen = game.fen();
     this.setState({ game, fen }, () => {
       this.setOrientation();
@@ -91,6 +93,8 @@ export default class SolutionSetup extends Component {
     game.undo();
     this.updateGame(game)
     console.log(`fen now: ${this.state.fen}`)
+    console.log(`game now: ${this.state.game.ascii()}`)
+    console.log(`gameHistory now: ${this.state.game.history()}`)
   }
   onSubmit() {
     const turn = this.state.game.turn();

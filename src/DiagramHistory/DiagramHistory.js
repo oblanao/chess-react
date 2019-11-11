@@ -7,6 +7,8 @@ export default function DiagramHistory(props) {
   const [element, setElement] = useState(null)
   const [moves, setMoves] = useState([])
   useEffect(() => {
+    console.log(`DiagramHistory useEffect`)
+    console.log(`history: `, props.history)
     const {
       history,
       sideToMove
@@ -14,29 +16,29 @@ export default function DiagramHistory(props) {
     const movesPerLine = props.moverPerLine || 2;
     const prefixedMoves = utils.pgn.getPrefixedMoves(history, sideToMove, movesPerLine);
     setMoves(prefixedMoves);
-    if (prefixedMoves.length) {
-      const jsxEl = utils.pgn.getNotationJSX(prefixedMoves, onMoveClick, props.notationStyle)
-      setElement(jsxEl);
-      // If more than 5 lines, scroll to bottom
-      if (props.notationStyle !== 'simple' && moves.length >= 9) {
-        scrollToBottom()
-      }
-      const moveElements = document.getElementsByTagName('td');
-      for (let i = 0; i < moveElements.length; i++) {
-        if (i === props.currentMove - 1) {
-          moveElements[i].style.background = 'black';
-          moveElements[i].style.color = 'white';
-        } else {
-          moveElements[i].style.background = '';
-          moveElements[i].style.color = 'black';
-        }
-      }
-      // const currentMoveEl = moveElements[props.currentMove];
-      // if (currentMoveEl) {
-      //   currentMoveEl.style.background = 'black';
-      //   currentMoveEl.style.color = 'white';
-      // }
+    // if (prefixedMoves.length) {
+    const jsxEl = utils.pgn.getNotationJSX(prefixedMoves, onMoveClick, props.notationStyle)
+    setElement(jsxEl);
+    // If more than 5 lines, scroll to bottom
+    if (props.notationStyle !== 'simple' && moves.length >= 9) {
+      scrollToBottom()
     }
+    const moveElements = document.getElementsByTagName('td');
+    for (let i = 0; i < moveElements.length; i++) {
+      if (i === props.currentMove - 1) {
+        moveElements[i].style.background = 'black';
+        moveElements[i].style.color = 'white';
+      } else {
+        moveElements[i].style.background = '';
+        moveElements[i].style.color = 'black';
+      }
+    }
+    // const currentMoveEl = moveElements[props.currentMove];
+    // if (currentMoveEl) {
+    //   currentMoveEl.style.background = 'black';
+    //   currentMoveEl.style.color = 'white';
+    // }
+    // }
   }, [props, moves.length])
   function onMoveClick(moveIndex) {
     props.onMoveClick && props.onMoveClick(moveIndex)
