@@ -11,6 +11,7 @@ import Quiz from './Quiz';
 import PgnImport from "./PgnImport";
 import PositionSetup from "./PositionSetup";
 import GameReplayer from './GameReplayer';
+import QueenMate from './QueenMate';
 
 import sampleGame from './sampleGame';
 
@@ -35,6 +36,9 @@ export default function Main() {
         </Route>
         <Route path="/game-replayer">
           <GameReplayer game={sampleGame} />
+        </Route>
+        <Route path="/queen-mate">
+          <QueenMate />
         </Route>
         <Route path="*">
           <p>404 - Not Found</p>

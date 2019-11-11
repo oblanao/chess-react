@@ -11,6 +11,7 @@ export default function App() {
         <a href="/pgn-import">PGN Import</a>
         <a href="/position-setup">Position Setup</a>
         <a href="/game-replayer">Game Replayer</a>
+        <a href="/queen-mate">Queen Mate Test</a>
       </div>
     </div>
   )
