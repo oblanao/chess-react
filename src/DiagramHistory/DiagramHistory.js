@@ -1,34 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import utils from '../utils';
+import React, { useEffect, useState } from "react";
+import utils from "../utils";
 
-import './DiagramHistory.css';
+import "./DiagramHistory.css";
 
 export default function DiagramHistory(props) {
-  const [element, setElement] = useState(null)
-  const [moves, setMoves] = useState([])
+  const [element, setElement] = useState(null);
+  const [moves, setMoves] = useState([]);
   useEffect(() => {
-    const {
-      history,
-      sideToMove
-    } = props;
+    console.log("effect used");
+    const { history, sideToMove } = props;
     const movesPerLine = props.moverPerLine || 2;
-    const prefixedMoves = utils.pgn.getPrefixedMoves(history, sideToMove, movesPerLine);
+    const prefixedMoves = utils.pgn.getPrefixedMoves(
+      history,
+      sideToMove,
+      movesPerLine
+    );
     setMoves(prefixedMoves);
     // if (prefixedMoves.length) {
-    const jsxEl = utils.pgn.getNotationJSX(prefixedMoves, onMoveClick, props.notationStyle)
+    const jsxEl = utils.pgn.getNotationJSX(
+      prefixedMoves,
+      onMoveClick,
+      props.notationStyle
+    );
     setElement(jsxEl);
     // If more than 5 lines, scroll to bottom
-    if (props.notationStyle !== 'simple' && moves.length >= 9) {
-      scrollToBottom()
+    if (props.notationStyle !== "simple" && moves.length >= 9) {
+      scrollToBottom();
     }
-    const moveElements = document.getElementsByTagName('td');
+    const moveElements = document.getElementsByTagName("td");
     for (let i = 0; i < moveElements.length; i++) {
       if (i === props.currentMove - 1) {
-        moveElements[i].style.background = 'black';
-        moveElements[i].style.color = 'white';
+        moveElements[i].style.background = "black";
+        moveElements[i].style.color = "white";
       } else {
-        moveElements[i].style.background = '';
-        moveElements[i].style.color = 'black';
+        moveElements[i].style.background = "";
+        moveElements[i].style.color = "black";
       }
     }
     // const currentMoveEl = moveElements[props.currentMove];
@@ -37,34 +43,40 @@ export default function DiagramHistory(props) {
     //   currentMoveEl.style.color = 'white';
     // }
     // }
-  }, [props.history, props.sideToMove, props.notationStyle])
+  }, [props.currentMove]);
   function onMoveClick(moveIndex) {
-    props.onMoveClick && props.onMoveClick(moveIndex)
+    props.onMoveClick && props.onMoveClick(moveIndex);
   }
   function scrollToBottom() {
-    let element = document.querySelector('.diagramHistory-mainContainer');
+    let element = document.querySelector(".diagramHistory-mainContainer");
     element.scrollTop = element.scrollHeight;
   }
   function getScrollClass() {
-    return props.notationStyle !== 'simple' && moves.length >= 9 ? 'showYScroll' : ''
+    return props.notationStyle !== "simple" && moves.length >= 9
+      ? "showYScroll"
+      : "";
   }
   function getDivClass() {
-    return props.notationStyle === 'simple' ? 'diagramHistory-simpleContainer' : 'diagramHistory-tableContainer'
+    return props.notationStyle === "simple"
+      ? "diagramHistory-simpleContainer"
+      : "diagramHistory-tableContainer";
   }
   function getContainerClass() {
-    return `${getDivClass()} ${getScrollClass()}`
+    return `${getDivClass()} ${getScrollClass()}`;
   }
   return (
-    <div className={`diagramHistory-mainContainer ${getContainerClass()}`} style={props.height && { height: props.height }}>
+    <div
+      className={`diagramHistory-mainContainer ${getContainerClass()}`}
+      style={props.height && { height: props.height }}
+    >
       {props.title && <p>{props.title}</p>}
-      {props.notationStyle === "simple" ?
+      {props.notationStyle === "simple" ? (
         <p>{element}</p>
-        :
+      ) : (
         <table>
-          <tbody>
-            {element}
-          </tbody>
-        </table>}
+          <tbody>{element}</tbody>
+        </table>
+      )}
     </div>
-  )
+  );
 }

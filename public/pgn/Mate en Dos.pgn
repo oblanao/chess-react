@@ -1,0 +1,43 @@
+8
+
+It's as simple as:
+
+options[selectedIndex].id
+shareimprove this answer
+answered Dec 15 '09 at 2:16
+
+zombat
+81.9k2121 gold badges146146 silver badges159159 bronze badges
+add a comment
+
+12
+
+Without making too many assumptions (i.e. select is a valid SELECT Element),
+
+var options = select.options;
+var id      = options[options.selectedIndex].id;
+var value   = options[options.selectedIndex].value;
+or,
+
+var options = select.options;
+var value   = (options.selectedIndex != -1) ? options[selectedIndex].value : null;
+var id      = (options.selectedIndex != -1) ? options[selectedIndex].id : null;
+Always check for falsity (or values that evaluate to false). Ex 2 sets variables to null (if there is nothing selected).
+
+shareimprove this answer
+answered Dec 15 '09 at 2:38
+
+Michiel Kalkman
+2,9332020 silver badges2525 bronze badges
+add a comment
+Your Answer
+Sign up or log in
+ Sign up using Google
+ Sign up using Facebook
+ Sign up using Email and Password
+Post as a guest
+Name
+Email
+Required, but never shown
+
+Post Your Answer
